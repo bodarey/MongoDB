@@ -21,14 +21,21 @@ pg_result = pg_conn.exec("SELECT * FROM employees ")
 
 # Insert data into MongoDB
 pg_result.each do |row|
-  puts row
- mongo_collection.insert_one(row)
+  #puts row
+ #mongo_collection.insert_one(row)
 end
-#mongo_collection.find({city:'London'})
-# mongo_collection.find().sort({first_name:1})
+
+mongo_collection.find({},{city:true}).each do |document|
+  puts document
+end
+
+#rez = mongo_collection.find({city:'London'})
+
+#rez = mongo_collection.find().sort({first_name:1})
+
 # mongo_collection.find({},{city:true})
 
-puts "Data copied from PostgreSQL to MongoDB successfully!"
+#puts "Data copied from PostgreSQL to MongoDB successfully!"
 
 # Close connections
 pg_conn.close
