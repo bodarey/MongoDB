@@ -25,15 +25,15 @@ pg_result.each do |row|
  #mongo_collection.insert_one(row)
 end
 
-mongo_collection.find({},{projection: {city:true}}).each do |document|
+mongo_collection.find({city:'London'}).each do |document|
   puts document
 end
 
-#rez = mongo_collection.find({city:'London'})
+#rez = mongo_collection.find({city:'London'}})
 
 #rez = mongo_collection.find().sort({first_name:1})
 
-# mongo_collection.find({},{city:true})
+#mongo_collection.find({},{projection: {city:true}}).each do |document|
 
 #puts "Data copied from PostgreSQL to MongoDB successfully!"
 
