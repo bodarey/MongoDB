@@ -5,10 +5,10 @@ require 'mongo'
 
 # PostgreSQL connection
 conn_params = {
-  host: 'localhost',  # Replace with your database host
-  dbname: 'postgres', # Replace with your database name
-  user: 'postgres',   # Replace with your database username
-  password: 'fraer'   # Replace with your database password
+  host: 'localhost',  
+  dbname: 'postgres', 
+  user: 'postgres',   
+  password: 'fraer'   
 }
 pg_conn = PG.connect(conn_params)
 
@@ -24,6 +24,9 @@ pg_result.each do |row|
   puts row
  mongo_collection.insert_one(row)
 end
+#mongo_collection.find({city:'London'})
+# mongo_collection.find().sort({first_name:1})
+# mongo_collection.find({},{city:true})
 
 puts "Data copied from PostgreSQL to MongoDB successfully!"
 
