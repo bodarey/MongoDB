@@ -25,7 +25,7 @@ pg_result.each do |row|
  #mongo_collection.insert_one(row)
 end
 
-mongo_collection.find({},{city:true}).each do |document|
+mongo_collection.find({},{projection: {city:true}}).each do |document|
   puts document
 end
 
