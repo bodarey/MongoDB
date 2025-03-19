@@ -36,3 +36,9 @@ db.patient.updateOne(
 );
 -------------------------------------find the patient with age greater than 10
 db.patient.find({age:{$gt:10}})
+------------------------- delete all patients with disease cold
+
+db.patient.deleteMany({'history.disease':'cold'})
+
+------------------------------------------
+
