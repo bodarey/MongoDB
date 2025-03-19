@@ -3,7 +3,42 @@ show dbs
 db.shop.insertOne({name:'first name',age: 25, description: 'new description'})
 
 db.products.find().pretty()
+-------------------------
+use Patients
 
+db.patient.insertOne({firstName: "Max",lastName: "Schwarzmullter",age: 29,history:[{disease:"cold",treatment:"get in place"},{disease: 'worm',treatment:'new treatment'},{disease:'hot', treatment:'old treatment'}]})
+db.patient.insertOne({firstName: "Daniel",lastName: "White",age: 40,history:[{disease:"warm",treatment:"in place"},{disease: 'hot',treatment:'new treatment'},{disease:'hot', treatment:'old treatment'}]})
+db.patient.insertOne({firstName: "Den",lastName: "Black",age: 20,history:[{disease:"warm",treatment:"in place"},{disease: 'NA',treatment:'new treatment'},{disease:'cold and hot', treatment:' treatment'}]})
+db.patient.find()
+Patients> db.patient.updateOne({firstName: 'Den',history:{$elemMatch:{disease:'NA'}}},
+{$set:{firstName:'newfirstName',age:19,'history.$.disease':'NA updated','history.$.treatment':'treat updated'}})
 
-
-
+db.patient.updateOne(
+{ firstName: 'newFirstName' },
+{ 
+  $set:{
+    firstName: 'abc', 
+    age: 10, 
+    'history.$[event].disease': 'abc dis',
+    'history.$[event].treatment': 'abc treat'
+  } 
+},
+ {
+ arrayFilters: [{ 'event.disease': 'NA updated' }] 
+} 
+);
+----------
+db.patient.updateOne(
+  { firstName: 'newFirstName' }, // Filter (correct)
+  { 
+    $set: { 
+      firstName: 'abc', 
+      age: 10, 
+      'history.$[event].disease': 'abc dis', 
+      'history.$[event].treatment': 'abc treat' 
+    } 
+  }, // Update (correct)
+  { 
+    arrayFilters: [{ 'event.disease': 'NA updated' }] // ✅ Correct: This is part of the options object
+  }
+);
