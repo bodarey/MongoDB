@@ -1,0 +1,9 @@
+
+show dbs
+db.shop.insertOne({name:'first name',age: 25, description: 'new description'})
+
+db.products.find().pretty()
+
+
+
+
