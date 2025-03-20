@@ -1,0 +1,41 @@
+use Baza
+db.createCollection('books')
+db.createCollection('authors')
+
+db.authors.insertOne({name: 'Jhon',last: 'White',age: 50})
+db.authors.insertOne({name: 'Den',last: 'Black',age: 40})
+
+db.books.insertOne({title:'my book', authors:[ObjectId('67dc61fe0d6f41908cb71236')]});
+db.books.insertOne({title:'my book2', authors:[ObjectId('67dc621d0d6f41908cb71237')]});
+-----------------------join collections using lookup
+db.books.aggregate([{$lookup:{from:'authors',localField:'authors',foreignField:'_id',as:'added'}}])
+----------------result
+[
+  {
+    _id: ObjectId('67dc630445ebf8b1391c6301'),
+    title: 'my book',
+    authors: [ ObjectId('67dc61fe0d6f41908cb71236') ],
+    added: [
+      {
+        _id: ObjectId('67dc61fe0d6f41908cb71236'),
+        name: 'Jhon',
+        last: 'White',
+        age: 50
+      }
+    ]
+  },
+  {
+    _id: ObjectId('67dc632e45ebf8b1391c6302'),
+    title: 'my book2',
+    authors: [ ObjectId('67dc621d0d6f41908cb71237') ],
+    added: [
+      {
+        _id: ObjectId('67dc621d0d6f41908cb71237'),
+        name: 'Den',
+        last: 'Black',
+        age: 40
+      }
+    ]
+  }
+]
+-------------------
