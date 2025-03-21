@@ -1,0 +1,8 @@
+--import from json--
+
+>mongoimport --db boxOffice --collection exmoviestarts --file "C:\Users\Andy\Desktop\Udemy - MongoDB - The Complete Developer's Guide 2025 (2025-1)\07. Read Operations - A Closer Look\assets\01. tv-shows.json" --jsonArray
+
+
+-------------operator or,gt and lt
+db.exmoviestarts.find({$and:[{'rating.average':{$gt:9.2}},{runtime:{$lt:100}}]})
+-------------------------------
