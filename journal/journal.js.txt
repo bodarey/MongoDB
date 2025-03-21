@@ -1,0 +1,19 @@
+----------insert few commpanies in database------
+Baza> db.companies.insertMany([{name:'company2',address:'address company2',phone:'4784456',details:''},
+{name:'company3',address:'address company3',phone:'54475456',details:''},
+{name:'comapny4',address:'address company4',phone:'548754545',details:''}])
+
+---------insert duplicates also with existing id to renew information in document(where id is not duplicated)---using insertMany (and ordered:false)
+db.companies.insertOne({_id:123, name:'company5', address:'address company 5',phone:'5545455854',details:''})
+db.companies.deleteMany({$or:[{_id:213},{name:'company6'}]})
+
+db.companies.insertMany([{name:'company2',address:'address company2',phone:'4784456',details:'',_id:123},
+{name:'company6',address:'address company6',phone:'5554475456',details:''}],
+{ordered:false})
+
+----------inserting comand in the journal-------------
+db.companies.insertOne({name:'company new', address:'address company  updated',phone:'66555555',details:''},{writeConcern:{j:1}})
+
+
+
+
