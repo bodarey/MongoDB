@@ -14,3 +14,47 @@ db.moviestarts.find({$or:[{genres:'Action'},{genres:'Drama'}]})
 ----------------------------------------------------------movies with visitors more that expected---
 db.moviestarts.find({$expr:{$gt:['$visitors','$expectedvisitors']}})
 ------------------------------------------------------------
+----------------------find documents with genres that have 2 elements in array
+
+db.exmoviestarts.find({genre:{$size:2}})
+  {
+    _id: ObjectId('67deb6e816f6dd448f49a998'),
+    title: 'Teach me if you can',
+    meta: { rating: 8, aired: 2014, runtime: 90 },
+    visitors: 590378,
+    expectedVisitors: 500000,
+    genre: [ 'action', 'thriller' ],
+    ratings: [ 8, 8 ]
+  }
+------------------------------------------find movies that was aired in 2018
+db.exmoviestarts.find({'meta.aired':2018})
+
+---------------------find movies with ratings greater than 8 and lower than 10
+db.exmoviestarts.find({ratings:{$elemMatch:{$gt:8,$lt:10}}})
+-----------------------
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
