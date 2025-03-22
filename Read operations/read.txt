@@ -6,3 +6,11 @@
 -------------operator or,gt and lt
 db.exmoviestarts.find({$and:[{'rating.average':{$gt:9.2}},{runtime:{$lt:100}}]})
 -------------------------------
+
+
+-------------all movies with genre: drama and action-------
+db.moviestarts.find({$or:[{genres:'Action'},{genres:'Drama'}]})
+
+----------------------------------------------------------movies with visitors more that expected---
+db.moviestarts.find({$expr:{$gt:['$visitors','$expectedvisitors']}})
+------------------------------------------------------------
