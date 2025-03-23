@@ -1,0 +1,24 @@
+#---------- insert by adding one document using upsert, if document exists it's replaced if not it's added
+db.sports.insertOne({title: 'team1', requiresTeam: true},{upsert:true})
+
+
+----------------------add a new field with min players required for thouse documents that requiresTeam
+db.sports.updateMany({requiresTeam: true},{$set:{minimplayers:''}})
+
+Baza> db.sports.find()
+[
+  {
+    _id: ObjectId('67e017cb8738513fe6b71236'),
+    title: 'team1',
+    requiresTeam: true,
+    minimplayers: ''
+  },
+  {
+    _id: ObjectId('67e018e78738513fe6b71237'),
+    title: 'team2',
+    requiresTeam: false
+  }
+]                              
+----------------------   for documents that requires teams increment by 10 minim players
+db.sports.updateMany({requiresTeam: true},{$set:{minimplayers:1}})
+Baza> db.sports.updateMany({requiresTeam:true},{$inc:{minimplayers:10}})
