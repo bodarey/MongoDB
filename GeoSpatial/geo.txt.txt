@@ -1,0 +1,11 @@
+-- insert 3 points from googlemaps
+db.places.insertOne({name: 'Aurica',locations:{'type':'Point', coordinates:[27.8875428,47.7566087]}})
+db.places.insertOne({name: 'Зоомагазин ZOOmag Бельцы',locations:{'type':'Point', coordinates:[27.878108,47.7552304]}})
+db.places.insertOne({name: 'Zona de Odihnă',locations:{'type':'Point', coordinates:[27.8717995,47.7500945]}})
+
+-- take one place and find the nearest places using near
+
+db.places.createIndex({locations: '2dsphere'})
+db.places.find({locations:{$near: {$geometry:{type: 'Point', coordinates:[27.8745031,47.7502244]},$maxDistance: 1000}}})
+
+
