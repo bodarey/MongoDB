@@ -9,3 +9,25 @@ db.places.createIndex({locations: '2dsphere'})
 db.places.find({locations:{$near: {$geometry:{type: 'Point', coordinates:[27.8745031,47.7502244]},$maxDistance: 1000}}})
 
 
+{
+  _id: ObjectId('67e464c2659b367144bcb1a3'),
+  name: 'Zona de Odihnă',
+  locations: {
+    type: 'Point',
+    coordinates: [
+      27.8717995,
+      47.7500945
+    ]
+  }
+}
+{
+  _id: ObjectId('67e4646c659b367144bcb1a2'),
+  name: 'Зоомагазин ZOOmag Бельцы',
+  locations: {
+    type: 'Point',
+    coordinates: [
+      27.878108,
+      47.7552304
+    ]
+  }
+}
