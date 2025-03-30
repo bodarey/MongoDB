@@ -1,0 +1,78 @@
+// find all persons older than 50
+
+db.persons.aggregate([{$match:{'dob.age':{$gt:50}}}])
+---------------------------------
+// group result by gender
+
+ db.persons.aggregate([{$match:{'dob.age':{$gt:50}}},
+...     {$group:{'_id':{gender:'$gender'}}}
+... 
+... ])
+
+
+--------------------------
+// count number of persons per genre
+
+db.persons.aggregate([
+    {
+        $match:{
+        'dob.age':{$gt:50}
+        }
+    },
+    {
+        $group:{
+            _id:{gender:'$gender'},
+            number_persons: {$sum:1}
+        }
+    }
+])
+
+------------------------------
+// add average age per genre and sort result by number of persons
+
+db.persons.aggregate([
+    {
+        $match:{
+        'dob.age':{$gt:50}
+        }
+    },
+    {
+        $group:{
+            _id:{gender:'$gender'},
+            number_persons: {$sum:1},
+            average_age: {$avg: '$dob.age'}
+        }
+    },
+    {
+      $sort:{number_persons:1}
+    }
+])
+------------
+// result
+
+[
+  {
+    _id: { gender: 'male' },
+    number_persons: 1079,
+    average_age: 62.066728452270624
+  },
+  {
+    _id: { gender: 'female' },
+    number_persons: 1125,
+    average_age: 61.90577777777778
+  }
+]
+---------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
